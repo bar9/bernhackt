@@ -1,0 +1,11 @@
+{
+  "name": "bernhackt",
+  "version": "1.0.0",
+  "description": "Personal tools for Bernhackt hackathon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Roland Brand",
+  "license": "MIT"
+}
