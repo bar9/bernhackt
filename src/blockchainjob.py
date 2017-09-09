@@ -14,14 +14,23 @@ def process(folder_path):
 			process_file(current)
 
 def process_file(file):
-	hash = get_hash(file)
+	if should_store_hash_in_blockchain(file):
+		hash = get_hash(file)
+		store_hash_in_blockchain(hash)
+
+
+def should_store_hash_in_blockchain(file):
+	return True
+
+def store_hash_in_blockchain(hash):
+	print 'Storing hash: {}\n'.format(hash)
 
 
 def get_hash(file):
 	data = open(file, "rb")
 	data_string = data.read()
 	hash = hashlib.sha256(data_string).hexdigest()
-	print 'Hash: {}\n'.format(hash)
+	print 'Hash: {}'.format(hash)
 	return hash
 
 def run():
