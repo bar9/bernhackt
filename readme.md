@@ -3,12 +3,10 @@
 Group repo
 
 ## Questions
-- [x] Are we allowed to write to a hidden file (e.g. ds_store): 
-
-        Yes, you can write hidden files to the share.
-- [x] Is the status in the file explorer mandatory or just an example?
-
-     Just an example. GUI part of the service will be implemented by netrics.
+- [x] Are we allowed to write to a hidden file (e.g. ds_store):  
+Yes, you can write hidden files to the share.
+- [x] Is the status in the file explorer mandatory or just an example?  
+Just an example. GUI part of the service will be implemented by netrics.
 - [x] How to distinguish files to watch from files to ignore:
 
 You can make a proposition. My idea is, that we can configure the service with a regexp. File names matching the regexp will be watched.
