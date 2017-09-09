@@ -33,3 +33,8 @@ Group repo
 - [x] Communications: Slack, GitHub
 
 ### Implementation
+
+### Local setup
+* `git clone https://github.com/bar9/bernhackt`
+* `vagrant up`
+* `vagrant ssh`
