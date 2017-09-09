@@ -1,0 +1,3 @@
+[submodule "browsepy"]
+	path = browsepy
+	url = https://github.com/bar9/browsepy.git
