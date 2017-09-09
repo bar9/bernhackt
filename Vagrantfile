@@ -8,7 +8,8 @@ Vagrant.configure("2") do |config|
       sudo apt-get install -y python-dev
       sudo apt-get install -y python-pip
       sudo pip3 install --upgrade pip
-      pip install browsepy
+      pip install git+https://github.com/bar9/browsepy.git
       browsepy 0.0.0.0 80 --directory /vagrant/demo_data
+      #browsepy 0.0.0.0 80 --directory /vagrant/demo_data --plugin=blockchain_verification
 SHELL
 end
