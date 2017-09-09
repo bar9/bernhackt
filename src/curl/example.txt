@@ -38,4 +38,5 @@ https://github.com/ethereum/wiki/wiki/JSON-RPC
 ./Ethereum\ Wallet --node-light --rinkeby
 
 myEtherWallet:
+https://www.myetherwallet.com/
 Wallet password: newkids.block
