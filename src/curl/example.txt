@@ -1,1 +1,41 @@
-curl --data-binary '{"jsonrpc":"1.0","id":"curltext","method":"eth_gasPrice","params":[]}' -H 'content-type:text/plain;' http://localhost:8545/
+- Install geth:
+brew install geth
+(brew link --overwrite geth)
+
+- Start geth on rinkeby testnet as light node with rpc support (default port: 8545):
+geth --rpc --rinkeby -syncmode light
+
+(or:
+geth --rpc --datadir=$HOME/.rinkeby --light init rinkeby.json
+geth --networkid=4 --datadir=$HOME/.rinkeby --syncmode=light --ethstats='yournode:Respect my authoritah!@stats.rinkeby.io' --bootnodes=enode://a24ac7c5484ef4ed0c5eb2d36620ba4e4aa13b8c84684e1b4aab0cebea2ae45cb4d375b77eab56516d34bfbd3c1a833fc51296ff084b770b94fb9028c4d25ccf@52.169.42.101:30303?discport=30304)
+
+
+- Send curl request to geth
+
+curl --data-binary '{"jsonrpc":"2.0","id":"curltext","method":"eth_gasPrice","params":[]}' -H 'content-type:text/plain;' http://localhost:8545/
+curl -X POST --data '{"jsonrpc":"2.0","id":"curltext","method":"eth_blockNumber","params":[]}' -H 'content-type:text/plain;' http://localhost:8545/
+curl -X POST --data '{"jsonrpc":"2.0","id":"curltext","method":"net_version","params":[]}' -H 'content-type:text/plain;' http://localhost:8545/
+curl -X POST --data '{"jsonrpc":"2.0","id":"curltext","method":"eth_getBalance","params":["0x4f7696940Cfe0C75c830da07435e65e5ebb610B0", "latest"]}' -H 'content-type:text/plain;' http://localhost:8545/
+
+curl -s -X POST --data '{"jsonrpc":"2.0", "method":"eth_getBalance", "params":["0xc5910bcb2442e84845aa98b20ca51e8f5d2bee23", "latest"], "id":1}' http://localhost:8545
+
+
+curl -X POST --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}' http://localhost:8545/
+
+
+
+
+- Result hex:
+bash -c 'let x=0x29a2241af62c0000 ; echo $x'
+
+Python rpc & Ethereum:
+https://github.com/ethereum/wiki/wiki/JSON-RPC
+
+- Not necessary 
+/Applications/Ethereum Wallet.app/Contents/MacOS
+
+- Not working...
+./Ethereum\ Wallet --node-light --rinkeby
+
+myEtherWallet:
+Wallet password: newkids.block
