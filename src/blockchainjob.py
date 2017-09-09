@@ -5,26 +5,36 @@
 import os
 import sys
 import hashlib
+from web3 import Web3, HTTPProvider, IPCProvider
+from ethereum.transactions import Transaction
+import rlp
 
 def process(folder_path):
+	web3 = Web3(HTTPProvider('http://localhost:8545'))
+	
 	for file in os.listdir(folder_path):
 		current = os.path.join(folder_path, file)
 		if os.path.isfile(current):
 			print 'Processing: {}'.format(current)
-			process_file(current)
+			process_file(current, web3)
 
-def process_file(file):
+def process_file(file, web3):
 	if should_store_hash_in_blockchain(file):
 		hash = get_hash(file)
-		store_hash_in_blockchain(hash)
-
+		store_hash_in_blockchain(hash, web3)
 
 def should_store_hash_in_blockchain(file):
 	return True
 
-def store_hash_in_blockchain(hash):
+def store_hash_in_blockchain(hash, web3):
 	print 'Storing hash: {}\n'.format(hash)
-
+	print 'Current block height: {}'.format(web3.eth.blockNumber)
+	
+	address_from = '0x4f7696940Cfe0C75c830da07435e65e5ebb610B0'
+	address_to = '0x85043213AFbA0eccd37F29DE0BB760b42EBd5d58'
+	private_key = '0c6ae2768077764b1c1ed3e6b52a2df64f01fd465a450b0a1a989ffbbbaecaac'
+	
+	
 
 def get_hash(file):
 	data = open(file, "rb")
