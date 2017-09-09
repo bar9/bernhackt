@@ -3,15 +3,15 @@
 Group repo
 
 ## Questions
-- [ ] Are we allowed to write to a hidden file (e.g. ds_store): 
+- [x] Are we allowed to write to a hidden file (e.g. ds_store): 
         Yes, you can write hidden files to the share.
-- [ ] Is the status in the file explorer mandatory or just an example?
+- [x] Is the status in the file explorer mandatory or just an example?
      Just an example. GUI part of the service will be implemented by netrics.
-- [ ] How to distinguish files to watch from files to ignore:
+- [x] How to distinguish files to watch from files to ignore:
 You can make a proposition. My idea is, that we can configure the service with a regexp. File names matching the regexp will be watched.
-- [ ] Runtime environment of the Netrix service (how do we access the fs)?
+- [x] Runtime environment of the Netrix service (how do we access the fs)?
 Login dates are described in the challenge document.
-- [ ] Meet personally? No slack or phone, only email possible.
+- [x] Meet personally? No slack or phone, only email possible.
 
 ## Tasks
 ### User needs / stakeholders
