@@ -34,21 +34,12 @@ def store_hash_in_blockchain(hash, web3):
 	address_to = '0x85043213AFbA0eccd37F29DE0BB760b42EBd5d58'
 	private_key = '0c6ae2768077764b1c1ed3e6b52a2df64f01fd465a450b0a1a989ffbbbaecaac'
 	data = ' '.join(format(x, 'b') for x in bytearray(hash))
-	
-	tx = Transaction(
-	nonce=web3.eth.getTransactionCount(address_from),
-	gasprice=42000, #web3.eth.gasPrice
-	startgas=30000,
-	to='0x85043213AFbA0eccd37F29DE0BB760b42EBd5d58',
-	value=0.1,
-	data=b' ',
-	)
-	tx.sign(private_key)
-	raw_tx = rlp.encode(tx)
-	raw_tx_hex = web3.toHex(raw_tx)
-	result = web3.eth.sendRawTransaction(raw_tx_hex)
-	print result
 
+	print 'Current balance: {}'.format(web3.eth.getBalance(address_from))
+
+	result = web3.eth.sendTransaction({'to': address_to, 'from': address_from, 'value': 12345})
+
+	print result
 
 def get_hash(file):
 	data = open(file, "rb")
