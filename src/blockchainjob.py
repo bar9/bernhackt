@@ -69,6 +69,10 @@ def store_hash_in_blockchain(hash, web3):
 def compare_hash_in_blockchain(hash, tx_hash, web3):
 	# 0x1a204dbf0793799a44d7244ca08a86890212cc4c4189e89306967582585d60bc
 	tx = web3.eth.getTransaction(tx_hash)
+	
+	if not tx:
+		return False
+	
 	print tx
 
 def get_hash(file):
@@ -84,7 +88,6 @@ def get_tx_hash(file):
 	
 def set_tx_hash(file):
 	# TODO set metadata "tx_hash" in file
-	return '0x1a204dbf0793799a44d7244ca08a86890212cc4c4189e89306967582585d60bc'	
 	
 def get_state(file):
 	# TODO get metadata "state" from file
