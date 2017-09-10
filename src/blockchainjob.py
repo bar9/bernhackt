@@ -79,8 +79,20 @@ def get_hash(file):
 	return hash
 	
 def get_tx_hash(file):
-	# TODO get txhash from file
+	# TODO get metadata "tx_hash" from file
 	return '0x1a204dbf0793799a44d7244ca08a86890212cc4c4189e89306967582585d60bc'
+	
+def set_tx_hash(file):
+	# TODO set metadata "tx_hash" in file
+	return '0x1a204dbf0793799a44d7244ca08a86890212cc4c4189e89306967582585d60bc'	
+	
+def get_state(file):
+	# TODO get metadata "state" from file
+	return 'green'
+	
+def set_state(file):
+	# TODO get metadata "state" from file
+	return 'red'
 
 def run():
 	from sys import argv, stdout
