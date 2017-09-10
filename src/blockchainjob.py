@@ -9,37 +9,46 @@ from web3 import Web3, HTTPProvider, IPCProvider
 from ethereum.transactions import Transaction
 import rlp
 import binascii
+import time 
 
 def process(folder_path):
 	web3 = Web3(HTTPProvider('http://localhost:8545'))
 	
 	for file in os.listdir(folder_path):
 		current = os.path.join(folder_path, file)
-		if os.path.isfile(current):
-			print 'Processing: {}'.format(current)
+		if os.path.isfile(current):						
 			process_file(current, web3)
 
 def process_file(file, web3):
-	hash = get_hash(file)
-
+	# DEMO: We only process 1 file
 	if not (file == '../demo_data/Excel1.xls'):
 		return False
+	
+	print 'Processing: {}'.format(file)
+
+	hash = get_hash(file)
+
+	tx_hash = None
 
 	if should_store_hash_in_blockchain(file):
 		tx_hash = store_hash_in_blockchain(hash, web3)
 		set_tx_hash(file, tx_hash)
 	
 	if should_compare_hash(file):
-		tx_hash = get_tx_hash(file)
+		#tx_hash = get_tx_hash(file)
+		print 'Waiting for confirmation'
+		# Wait for confirmation
+		time.sleep(20) 
+
 		compare_hash_in_blockchain(hash, tx_hash, web3)
 
 def should_store_hash_in_blockchain(file):
 	# TODO check file metadata
-	return False
+	return True
 	
 def should_compare_hash(file):
 	# TODO check file metadata
-	return False
+	return True
 
 def store_hash_in_blockchain(hash, web3):
 	print 'Storing hash: {}'.format(hash)
@@ -76,10 +85,10 @@ def store_hash_in_blockchain(hash, web3):
 	return result
 
 def compare_hash_in_blockchain(hash, tx_hash, web3):
-	# 0x7b508bd0d9e2d36c4e9bee1712a82fa80b3d2d8eda25054ecc5eadcb7f192894
 	tx = web3.eth.getTransaction(tx_hash)
 
 	if not tx:
+		print 'Transaction: {} -> Not found in blockchain'.format(tx_hash)
 		return False
 		
 	data = tx.get('input')
