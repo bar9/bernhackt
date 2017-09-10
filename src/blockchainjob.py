@@ -19,11 +19,21 @@ def process(folder_path):
 			process_file(current, web3)
 
 def process_file(file, web3):
+	hash = get_hash(file)
+		
 	if should_store_hash_in_blockchain(file):
-		hash = get_hash(file)
 		store_hash_in_blockchain(hash, web3)
+	
+	if should_compare_hash(file):
+		tx_hash = get_tx_hash(file)
+		compare_hash_in_blockchain(hash, tx_hash, web3)
 
 def should_store_hash_in_blockchain(file):
+	# TODO check file metadata
+	return False
+	
+def should_compare_hash(file):
+	# TODO check file metadata
 	return True
 
 def store_hash_in_blockchain(hash, web3):
@@ -56,12 +66,21 @@ def store_hash_in_blockchain(hash, web3):
 	
 	print result
 
+def compare_hash_in_blockchain(hash, tx_hash, web3):
+	# 0x1a204dbf0793799a44d7244ca08a86890212cc4c4189e89306967582585d60bc
+	tx = web3.eth.getTransaction(tx_hash)
+	print tx
+
 def get_hash(file):
 	data = open(file, "rb")
 	data_string = data.read()
 	hash = hashlib.sha256(data_string).hexdigest()
 	print 'Hash: {}'.format(hash)
 	return hash
+	
+def get_tx_hash(file):
+	# TODO get txhash from file
+	return '0x1a204dbf0793799a44d7244ca08a86890212cc4c4189e89306967582585d60bc'
 
 def run():
 	from sys import argv, stdout
