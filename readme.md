@@ -16,22 +16,22 @@ No slack or phone, only email possible.
 
 ## Tasks
 ### User needs / stakeholders
-- [ ] User story mapping
-- [ ] Pitch
-- [ ] Specs existing product/interface
+- [x] User story mapping
+- [x] Pitch
+- [x] Specs existing product/interface
 - [x] Comparison of possible blockchains (Speed (Blocktimes), Security (Size), Price per Transaction) (edited)
 - [x] Justification for blockchain selection
 
 ### service / product
-- [ ] Specifications
-- [ ] Components
+- [x] Specifications
+- [x] Components
 - [ ] Mockups / Paper prototypes
-- [ ] (meta)data model
+- [x] (meta)data model
 
 ### Technology / methodology
-- [ ] Technology stack
-- [ ] Methodology (e.g. Scrum)
-- [ ] Timetable
+- [x] Technology stack
+- [x] Methodology (e.g. Scrum)
+- [x] Timetable
 
 ### Tooling
 
