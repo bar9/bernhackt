@@ -8,6 +8,7 @@ import hashlib
 from web3 import Web3, HTTPProvider, IPCProvider
 from ethereum.transactions import Transaction
 import rlp
+import binascii
 
 def process(folder_path):
 	web3 = Web3(HTTPProvider('http://localhost:8545'))
@@ -22,7 +23,8 @@ def process_file(file, web3):
 	hash = get_hash(file)
 		
 	if should_store_hash_in_blockchain(file):
-		store_hash_in_blockchain(hash, web3)
+		tx_hash = store_hash_in_blockchain(hash, web3)
+		set_tx_hash(file, tx_hash)
 	
 	if should_compare_hash(file):
 		tx_hash = get_tx_hash(file)
@@ -40,15 +42,12 @@ def store_hash_in_blockchain(hash, web3):
 	print 'Storing hash: {}'.format(hash)
 	print 'Current block height: {}'.format(web3.eth.blockNumber)
 	
-	address_from = '0x4f7696940Cfe0C75c830da07435e65e5ebb610B0' # account
-	address_to = '0x85043213AFbA0eccd37F29DE0BB760b42EBd5d58'
-	private_key = '0c6ae2768077764b1c1ed3e6b52a2df64f01fd465a450b0a1a989ffbbbaecaac'
+	address_from = '0x4f7696940Cfe0C75c830da07435e65e5ebb610B0' # our sending account
+	address_to = '0x85043213AFbA0eccd37F29DE0BB760b42EBd5d58' # our receving account
+	private_key = '0c6ae2768077764b1c1ed3e6b52a2df64f01fd465a450b0a1a989ffbbbaecaac' # sending accounts private key
 	data = ' '.join(format(x, 'b') for x in bytearray(hash))
 
 	print 'Current balance: {}'.format(web3.eth.getBalance(address_from))
-
-	#result = web3.eth.sendTransaction({'to': address_to, 'from': address_from, 'value': 12345})
-	#{"nonce":"0x08","gasPrice":"0x7530","gasLimit":"0x5208","to":"0x85043213AFbA0eccd37F29DE0BB760b42EBd5d58","value":"0x029d394a5d6305440000","data":"0x1982c2cbb51216cd7f19f603752165a8c5b7580890c243e2fff95048bda85a6e","chainId":4}
 
 	tx = Transaction(
 	nonce=web3.eth.getTransactionCount(address_from),
@@ -56,25 +55,45 @@ def store_hash_in_blockchain(hash, web3):
 	startgas=1000000,
 	to=address_to,
 	value=12345,
-	data=b' ',
+	data=data,
 	)
 	tx.sign(private_key)
 	raw_tx = rlp.encode(tx)
 	raw_tx_hex = web3.toHex(raw_tx)
 
-	result = web3.eth.sendRawTransaction(raw_tx_hex)
+	result = None
+	try:
+		result = web3.eth.sendRawTransaction(raw_tx_hex)
+	except:
+		# TODO proper error handling
+		print "Something went wrong."
 	
-	print result
+	print 'Transaction: {} -> Hash stored in blockchain'.format(result)
+	
+	return result
 
 def compare_hash_in_blockchain(hash, tx_hash, web3):
-	# 0x1a204dbf0793799a44d7244ca08a86890212cc4c4189e89306967582585d60bc
+	# 0x7b508bd0d9e2d36c4e9bee1712a82fa80b3d2d8eda25054ecc5eadcb7f192894
 	tx = web3.eth.getTransaction(tx_hash)
 
 	if not tx:
 		return False
-	
+		
 	data = tx.get('input')
-	print data
+		
+	binary = Web3.toUtf8(data)
+	
+	hash_decoded = decode_binary_string(binary.replace(" ", ""))
+
+	print 'Transaction: {} -> Hash retrieved from blockchain'.format(tx_hash)
+	print 'Hash: {}'.format(hash_decoded)
+		
+	return True
+
+def decode_binary_string(s):
+	return int(s, 2)
+	#return chr(int(s[:8], 2))
+	#return ''.join(chr(int(s[i*8:i*8+8],2)) for i in range(len(s)//8))
 
 def get_hash(file):
 	data = open(file, "rb")
@@ -85,9 +104,9 @@ def get_hash(file):
 
 def get_tx_hash(file):
 	# TODO get metadata "tx_hash" from file
-	return '0x1a204dbf0793799a44d7244ca08a86890212cc4c4189e89306967582585d60bc'
+	return '0x7b508bd0d9e2d36c4e9bee1712a82fa80b3d2d8eda25054ecc5eadcb7f192894'
 	
-def set_tx_hash(file):
+def set_tx_hash(file, tx_hash):
 	# TODO set metadata "tx_hash" in file
 	return True
 
@@ -95,7 +114,7 @@ def get_state(file):
 	# TODO get metadata "state" from file
 	return 'state'
 
-def set_state(file):
+def set_state(file, state):
 	# TODO get metadata "state" from file
 	return True
 
