@@ -1,0 +1,62 @@
+{
+    "./Excel.xls": 
+        {
+            "blockchain_status": 0,
+            "verification_status": 0,
+            "confirmation_date": "",
+            "transaction_id": "",
+            "is_tracked": 1,
+            "verified_hash": "",
+            "calculated_hash": ""
+        },
+    "./Excel1.xls": 
+        {
+            "blockchain_status": 0,
+            "verification_status": 0,
+            "confirmation_date": "",
+            "transaction_id": "",
+            "is_tracked": 1,
+            "verified_hash": "",
+            "calculated_hash": ""
+        },
+    "./Powerpoint.ppt": 
+        {
+            "blockchain_status": 0,
+            "verification_status": 0,
+            "confirmation_date": "",
+            "transaction_id": "",
+            "is_tracked": 1,
+            "verified_hash": "",
+            "calculated_hash": ""
+        },
+    "./Powerpoint2.ppt": 
+        {
+            "blockchain_status": 0,
+            "verification_status": 0,
+            "confirmation_date": "",
+            "transaction_id": "",
+            "is_tracked": 1,
+            "verified_hash": "",
+            "calculated_hash": ""
+        },
+    "./Word.doc": 
+        {
+            "blockchain_status": 0,
+            "verification_status": 0,
+            "confirmation_date": "",
+            "transaction_id": "",
+            "is_tracked": 1,
+            "verified_hash": "",
+            "calculated_hash": ""
+        },
+    "./Word2.doc": 
+        {
+            "blockchain_status": 0,
+            "verification_status": 0,
+            "confirmation_date": "",
+            "transaction_id": "",
+            "is_tracked": 1,
+            "verified_hash": "",
+            "calculated_hash": ""
+        }
+}
