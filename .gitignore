@@ -1,3 +1,9 @@
 
 .idea
 .vagrant
+src/trackFile.py
+src/testFileshare/test.txt
+src/simplejson/
+src/python-xmp-toolkit/
+src/output.json
+src/jsonManager.pyc
