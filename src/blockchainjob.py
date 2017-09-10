@@ -21,7 +21,10 @@ def process(folder_path):
 
 def process_file(file, web3):
 	hash = get_hash(file)
-		
+
+	if not (file == '../demo_data/Excel1.xls'):
+		return False
+
 	if should_store_hash_in_blockchain(file):
 		tx_hash = store_hash_in_blockchain(hash, web3)
 		set_tx_hash(file, tx_hash)
@@ -36,7 +39,7 @@ def should_store_hash_in_blockchain(file):
 	
 def should_compare_hash(file):
 	# TODO check file metadata
-	return True
+	return False
 
 def store_hash_in_blockchain(hash, web3):
 	print 'Storing hash: {}'.format(hash)
